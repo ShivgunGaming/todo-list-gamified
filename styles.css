@@ -1,45 +1,63 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    max-width: 500px;
+    max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-    color: #007bff;
+    color: #333; /* Dark gray text color */
+    margin-bottom: 20px;
 }
 
 .input-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 #taskInput {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px 0 0 5px;
+    padding: 15px;
+    border: 2px solid #e0e0e0; /* Light gray border */
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-right: 10px; /* Added margin-right for spacing */
+}
+
+#taskInput:focus {
+    border-color: #ccc; /* Lighter gray border on focus */
 }
 
 #addTaskBtn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
+    padding: 12px 24px;
+    background: linear-gradient(145deg, #ffffff, #e0e0e0);
+    border: 2px solid #e0e0e0;
+    color: #333;
+    border-radius: 20px; /* Rounded corners for both sides */
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #addTaskBtn:hover {
-    background-color: #0056b3;
+    background: linear-gradient(145deg, #e0e0e0, #ffffff);
+    border-color: #ccc;
 }
 
 ul {
@@ -48,9 +66,7 @@ ul {
 }
 
 li {
-    display: flex;
-    align-items: center;
-    padding: 10px;
+    padding: 15px;
     border-bottom: 1px solid #ddd;
     transition: background-color 0.3s;
 }
@@ -64,15 +80,26 @@ li.completed {
 }
 
 input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 15px;
+    cursor: pointer;
 }
 
 #feedback {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 20px;
 }
 
 #feedback p {
     margin: 0;
+    font-size: 18px;
+}
+
+#target {
+    font-weight: bold;
+}
+
+#gem {
+    font-weight: bold;
 }
