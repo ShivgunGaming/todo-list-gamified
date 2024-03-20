@@ -103,3 +103,20 @@ input[type="checkbox"] {
 #gem {
     font-weight: bold;
 }
+
+/* Add this CSS to styles.css */
+
+/* Styles for delete button */
+.delete-button {
+    background-color: transparent;
+    border: none;
+    color: #ff6347; /* Red color for delete button */
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-button:hover {
+    color: #d32f2f; /* Darker red color on hover */
+}
+
