@@ -3,7 +3,7 @@ const addTaskBtn = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
 const pointsDisplay = document.getElementById('points');
 const targetDisplay = document.getElementById('target');
-const diamondsDisplay = document.getElementById('diamonds');
+const diamondsDisplay = document.getElementById('gem');
 
 let points = 0;
 const targetPoints = 10;
@@ -19,8 +19,13 @@ function addTask() {
         checkbox.addEventListener('change', completeTask);
         const taskSpan = document.createElement('span');
         taskSpan.textContent = taskText;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '❌';
+        deleteButton.classList.add('delete-button'); // Add class to delete button
+        deleteButton.addEventListener('click', deleteTask);
         taskItem.appendChild(checkbox);
         taskItem.appendChild(taskSpan);
+        taskItem.appendChild(deleteButton);
         taskList.appendChild(taskItem);
         taskInput.value = '';
     }
@@ -31,7 +36,7 @@ function completeTask() {
     const taskItem = this.parentElement;
     taskItem.classList.toggle('completed');
     if (this.checked) {
-        points++; // Award 1 point for completing a task
+        points++; // Increment points when task is checked
         if (points >= targetPoints) {
             // Provide feedback when target is reached
             targetDisplay.textContent = "Congratulations! You've reached your target!";
@@ -41,28 +46,34 @@ function completeTask() {
             resetToDoList();
         }
     } else {
-        points--; // Deduct 1 point if task is unchecked
-        // Reset feedback if points go below target
-        if (points < targetPoints) {
-            targetDisplay.textContent = '';
+        points--; // Decrement points when task is unchecked
+        if (points < 0) {
+            points = 0; // Ensure points don't go below 0
         }
         if (points % targetPoints === targetPoints - 1) {
             // Remove diamonds if the remaining points become a multiple of targetPoints - 1
             removeDiamonds(1);
         }
+        if (points < targetPoints) {
+            // Reset feedback if points go below target
+            targetDisplay.textContent = '';
+        }
     }
     updatePointsDisplay();
 }
 
+// Function to delete task
+function deleteTask() {
+    const taskItem = this.parentElement;
+    taskList.removeChild(taskItem);
+}
 
 // Function to reset to-do list
 function resetToDoList() {
-    if (points >= targetPoints) {
-        const completedTasks = document.querySelectorAll('.completed');
-        completedTasks.forEach(task => {
-            taskList.removeChild(task); // Remove completed tasks
-        });
-    }
+    const completedTasks = document.querySelectorAll('.completed');
+    completedTasks.forEach(task => {
+        taskList.removeChild(task); // Remove completed tasks
+    });
     points = 0; // Reset points
     updatePointsDisplay();
 }
@@ -81,6 +92,9 @@ function awardDiamonds(amount) {
 // Function to remove diamonds
 function removeDiamonds(amount) {
     diamonds -= amount;
+    if (diamonds < 0) {
+        diamonds = 0; // Ensure diamonds don't go below 0
+    }
     diamondsDisplay.textContent = `Diamonds: ${diamonds}`;
 }
 
@@ -94,8 +108,5 @@ taskInput.addEventListener('keypress', function(event) {
     }
 });
 
-// Add event listener for each checkbox to handle task completion
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', completeTask);
-});
+// Initialize points display
+updatePointsDisplay();
